@@ -9,8 +9,7 @@ venv.bak/
 
 # Database
 *.sqlite3
-*.db
-data/*.db
+!data/discovery_engine.db
 
 # Python
 __pycache__/
