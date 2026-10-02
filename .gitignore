@@ -18,4 +18,3 @@ __pycache__/
 *.so
 
 # Streamlit/Vercel
-.streamlit/credentials.toml
