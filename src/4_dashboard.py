@@ -12,9 +12,16 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from pinecone import Pinecone
 
-# Determine project root directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(os.path.join(BASE_DIR, ".env"))
+
+# Bridge Streamlit Cloud Secrets into environment variables
+try:
+    for key, val in st.secrets.items():
+        if isinstance(val, str):
+            os.environ[key] = val
+except Exception:
+    pass
 
 # Streamlit Page Config
 st.set_page_config(
