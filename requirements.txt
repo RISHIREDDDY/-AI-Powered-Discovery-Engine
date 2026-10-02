@@ -1,0 +1,8 @@
+apify-client
+langchain
+langchain-google-genai
+pinecone
+streamlit
+plotly
+pandas
+python-dotenv

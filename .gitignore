@@ -1,0 +1,22 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Database
+*.sqlite3
+*.db
+data/*.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Streamlit/Vercel
+.streamlit/credentials.toml
