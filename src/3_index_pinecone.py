@@ -25,8 +25,8 @@ def index_data():
     print("Initializing Pinecone client...")
     pc = Pinecone(api_key=pinecone_api_key)
     
-    index_name = "google-photos-discovery"
-    dimension = 768 # Standard dimension for Gemini embeddings
+    index_name = "google-photos-discovery-v3"
+    dimension = 3072 # Standard dimension for gemini-embedding-001
     
     # Check if index exists, create if not
     existing_indexes = [index_info["name"] for index_info in pc.list_indexes()]
@@ -34,7 +34,7 @@ def index_data():
         print(f"Creating Pinecone index '{index_name}'...")
         pc.create_index(
             name=index_name,
-            dimension=384,
+            dimension=dimension,
             metric="cosine",
             spec=ServerlessSpec(
                 cloud="aws",
@@ -56,9 +56,8 @@ def index_data():
         print(f"Delete all failed/skipped: {e}")
     
     # Initialize Embeddings
-    print("Initializing HuggingFace Embeddings...")
-    from langchain_huggingface import HuggingFaceEmbeddings
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    print("Initializing Google Gemini Embeddings...")
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
     
     # Prepare data for upsert
     print(f"Generating embeddings and indexing {len(reviews)} reviews...")

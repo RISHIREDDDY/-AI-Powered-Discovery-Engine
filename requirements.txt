@@ -1,8 +1,6 @@
 apify-client
 langchain
 langchain-google-genai
-langchain-huggingface
-sentence-transformers
 pinecone
 streamlit
 plotly

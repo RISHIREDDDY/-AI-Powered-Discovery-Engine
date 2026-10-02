@@ -9,8 +9,7 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from pinecone import Pinecone
 
 # Determine project root directory
@@ -187,9 +186,10 @@ st.html(CUSTOM_CSS)
 @st.cache_resource(show_spinner=False)
 def get_vector_services():
     pinecone_key = os.getenv("PINECONE_API_KEY")
+    gemini_key = os.getenv("GEMINI_API_KEY")
     pc = Pinecone(api_key=pinecone_key)
-    index = pc.Index("google-photos-discovery")
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    index = pc.Index("google-photos-discovery-v3")
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001", google_api_key=gemini_key)
     return index, embeddings
 
 @st.cache_resource(show_spinner=False)
